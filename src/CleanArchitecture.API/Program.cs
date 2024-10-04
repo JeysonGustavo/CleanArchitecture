@@ -2,7 +2,7 @@ using CleanArchitecture.API.Configuration;
 using CleanArchitecture.API.Endpoints.Career;
 using CleanArchitecture.API.Mappers;
 using CleanArchitecture.API.Middleware;
-using CleanArchitecture.Domain.Common.App;
+using CleanArchitecture.Application.Common.App;
 using FluentValidation;
 using System.Reflection;
 

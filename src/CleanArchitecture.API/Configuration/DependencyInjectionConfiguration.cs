@@ -1,6 +1,6 @@
-﻿using CleanArchitecture.Domain.Data.DBSession;
-using CleanArchitecture.Domain.Data.UnitOfWork;
-using CleanArchitecture.Domain.Repositories.Career;
+﻿using CleanArchitecture.Application.Data.UnitOfWork;
+using CleanArchitecture.Application.Repositories.Career;
+using CleanArchitecture.Infrastructure.Data.DBSession;
 using CleanArchitecture.Infrastructure.Data.UnitOfWork;
 using CleanArchitecture.Infrastructure.Repositories.Career;
 
@@ -16,7 +16,7 @@ namespace CleanArchitecture.API.Configuration
             #endregion
 
             #region Connection
-            services.AddScoped<DBSession>();
+            services.AddScoped<ApplicationDBSession>();
             services.AddTransient<IUnitOfWork, UnitOfWork>();
             #endregion
         }

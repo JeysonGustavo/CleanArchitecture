@@ -1,8 +1,8 @@
-﻿using CleanArchitecture.Application.Contracts.Response.Career;
-using CleanArchitecture.Domain.Common.App;
+﻿using CleanArchitecture.Application.Common.App;
+using CleanArchitecture.Application.Contracts.Response.Career;
+using CleanArchitecture.Application.Messaging.Command;
+using CleanArchitecture.Application.Repositories.Career;
 using CleanArchitecture.Domain.Entities.Career;
-using CleanArchitecture.Domain.Messaging.Command;
-using CleanArchitecture.Domain.Repositories.Career;
 using Mapster;
 
 namespace CleanArchitecture.Application.Features.Career.Commands.CreateCareer
@@ -18,11 +18,11 @@ namespace CleanArchitecture.Application.Features.Career.Commands.CreateCareer
         {
             var career = command.Adapt<CareerEntity>();
 
-            career = await _careerRepository.CreateCareer(career);
+            career = await _careerRepository.CreateCareerAsync(career);
 
             var response = career.Adapt<CareerResponse>();
 
-            return new ApplicationResult().WithSuccess(response);
+            return ApplicationResult.WithSuccess(response);
         }
         #endregion
     }

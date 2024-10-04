@@ -1,6 +1,6 @@
-﻿using CleanArchitecture.Domain.Common.App;
-using CleanArchitecture.Domain.Common.Exceptions;
-using CleanArchitecture.Domain.Common.ExtensionMethods;
+﻿using CleanArchitecture.Application.Common.App;
+using CleanArchitecture.Application.Common.Exceptions;
+using CleanArchitecture.ExtensionMethods;
 using FluentValidation;
 
 namespace CleanArchitecture.API.Middleware
@@ -47,7 +47,7 @@ namespace CleanArchitecture.API.Middleware
                 foreach (var error in validationException.Errors)
                     errors.Add(new Error(error.ErrorCode, error.ErrorMessage));
 
-            await httpContext.Response.WriteAsync(new ApplicationResult().WithError(errors).ObjectToJson());
+            await httpContext.Response.WriteAsync(ApplicationResult.WithError(errors).ObjectToJson());
         }
         #endregion
 
@@ -70,7 +70,7 @@ namespace CleanArchitecture.API.Middleware
                 _ => "Internal Server Error"
             };
 
-            return context.Response.WriteAsync(new ApplicationResult().WithError("1", errorMessage).ObjectToJson());
+            return context.Response.WriteAsync(ApplicationResult.WithError("1", errorMessage).ObjectToJson());
         }
         #endregion
     }

@@ -1,12 +1,12 @@
-﻿using CleanArchitecture.Domain.Data.DBSession;
-using CleanArchitecture.Domain.Data.UnitOfWork;
+﻿using CleanArchitecture.Application.Data.UnitOfWork;
+using CleanArchitecture.Infrastructure.Data.DBSession;
 
 namespace CleanArchitecture.Infrastructure.Data.UnitOfWork
 {
-    public class UnitOfWork(DBSession dbSession) : IUnitOfWork
+    public class UnitOfWork(ApplicationDBSession dbSession) : IUnitOfWork
     {
         #region Properties
-        private readonly DBSession _dbSession = dbSession;
+        private readonly ApplicationDBSession _dbSession = dbSession;
         #endregion
 
         #region BeginTransaction

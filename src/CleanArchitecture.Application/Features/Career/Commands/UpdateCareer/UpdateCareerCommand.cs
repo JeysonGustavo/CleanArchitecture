@@ -1,12 +1,13 @@
-﻿using CleanArchitecture.Application.Common.ErrorMessage;
+using CleanArchitecture.Application.Common.ErrorMessage;
 using CleanArchitecture.Application.Messaging.Command;
 using FluentValidation;
 
-namespace CleanArchitecture.Application.Features.Career.Commands.CreateCareer
+namespace CleanArchitecture.Application.Features.Career.Commands.UpdateCareer
 {
-    public sealed record CreateCareerCommand : ICommand
+    public sealed record UpdateCareerCommand : ICommand
     {
         #region Properties
+        public int Id { get; private set; }
         public string Language { get; private set; }
         public string Title { get; private set; }
         public string Introduction { get; private set; }
@@ -15,8 +16,9 @@ namespace CleanArchitecture.Application.Features.Career.Commands.CreateCareer
         #endregion
 
         #region Constructor
-        public CreateCareerCommand(string language, string title, string introduction, string description, string location)
+        public UpdateCareerCommand(int id, string language, string title, string introduction, string description, string location)
         {
+            Id = id;
             Language = language;
             Title = title;
             Introduction = introduction;
@@ -26,23 +28,28 @@ namespace CleanArchitecture.Application.Features.Career.Commands.CreateCareer
         #endregion
 
         #region Validator
-        public sealed class CreateCareerCommandValidator : AbstractValidator<CreateCareerCommand>
+        public sealed class UpdateCareerCommandValidator : AbstractValidator<UpdateCareerCommand>
         {
-            public CreateCareerCommandValidator()
+            public UpdateCareerCommandValidator()
             {
+                RuleFor(x => x.Id)
+                    .GreaterThan(0)
+                    .WithErrorCode("1")
+                    .WithMessage(DefaultErrorMessages.CAREER_ID_IS_REQUIRED);
+
                 RuleFor(x => x.Language)
                     .NotEmpty().When(x => string.IsNullOrEmpty(x.Language))
-                    .WithErrorCode("1")
+                    .WithErrorCode("2")
                     .WithMessage(DefaultErrorMessages.LANGUAGE_IS_REQUIRED);
 
                 RuleFor(x => x.Title)
                    .NotEmpty().When(x => string.IsNullOrEmpty(x.Title))
-                   .WithErrorCode("2")
+                   .WithErrorCode("3")
                    .WithMessage(DefaultErrorMessages.TITLE_IS_REQUIRED);
 
                 RuleFor(x => x.Description)
                    .NotEmpty().When(x => string.IsNullOrEmpty(x.Description))
-                   .WithErrorCode("3")
+                   .WithErrorCode("4")
                    .WithMessage(DefaultErrorMessages.DESCRIPTION_IS_REQUIRED);
             }
         }
