@@ -20,13 +20,15 @@ namespace CleanArchitecture.Infrastructure.Repositories.Career
             StringBuilder sqlBuilder = new();
             DynamicParameters dynamicParameters = new();
 
-            sqlBuilder.AppendLine(" INSERT INTO tblCareer ");
-            sqlBuilder.AppendLine(" (Language, Title, Introduction, Description, Location, CreatedOn, LastModifiedOn) ");
+            string sql = """
+                INSERT INTO tblCareer
+                (Language, Title, Introduction, Description, Location, CreatedOn, LastModifiedOn)
 
-            sqlBuilder.AppendLine(" OUTPUT INSERTED.Id ");
+                OUTPUT INSERTED.Id
 
-            sqlBuilder.AppendLine(" VALUES ");
-            sqlBuilder.AppendLine(" (@Language, @Title, @Introduction, @Description, @Location, GETDATE(), GETDATE()) ");
+                VALUES
+                (@Language, @Title, @Introduction, @Description, @Location, GETDATE(), GETDATE())
+                """;
 
             dynamicParameters.Add("@Language", career.Language, DbType.AnsiString, ParameterDirection.Input, CareerEntity.MAX_LENGTH_LANGUAGE);
             dynamicParameters.Add("@Title", career.Title, DbType.AnsiString, ParameterDirection.Input, CareerEntity.MAX_LENGTH_TITLE);
@@ -34,7 +36,7 @@ namespace CleanArchitecture.Infrastructure.Repositories.Career
             dynamicParameters.Add("@Description", career.Description, DbType.AnsiString, ParameterDirection.Input, CareerEntity.MAX_LENGTH_DESCRIPTION);
             dynamicParameters.Add("@Location", career.Location, DbType.AnsiString, ParameterDirection.Input, CareerEntity.MAX_LENGTH_LOCATION);
 
-            career.SetId(await _dbSession.Connection.ExecuteScalarAsync<int>(sql: sqlBuilder.ToString(), param: dynamicParameters, transaction: _dbSession.Transaction));
+            career.SetId(await _dbSession.Connection.ExecuteScalarAsync<int>(sql: sql, param: dynamicParameters, transaction: _dbSession.Transaction));
 
             return career;
         }
@@ -105,7 +107,7 @@ namespace CleanArchitecture.Infrastructure.Repositories.Career
         #endregion
 
         #region GetCarrersListAsync
-        public async Task<IEnumerable<CareerResponse>> GetCarrersListAsync(CareerListRequest request)
+        public async Task<IEnumerable<CareerResponse>> GetCarrersListAsync(CareerFilterListRequest request)
         {
             StringBuilder sqlBuilder = new();
             DynamicParameters dynamicParameters = new();

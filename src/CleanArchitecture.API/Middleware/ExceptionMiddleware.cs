@@ -1,6 +1,6 @@
 ﻿using CleanArchitecture.Application.Common.App;
 using CleanArchitecture.Application.Common.Exceptions;
-using CleanArchitecture.ExtensionMethods;
+using CleanArchitecture.Extension;
 using FluentValidation;
 
 namespace CleanArchitecture.API.Middleware

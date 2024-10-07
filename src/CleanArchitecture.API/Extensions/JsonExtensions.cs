@@ -1,6 +1,6 @@
 ﻿using System.Text.Json;
 
-namespace CleanArchitecture.ExtensionMethods
+namespace CleanArchitecture.Extension
 {
     public static class JsonExtensions
     {

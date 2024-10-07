@@ -15,7 +15,7 @@ namespace CleanArchitecture.Application.Features.Career.Queries.GetCarrersList
         #region Handle
         public async Task<ApplicationResult> Handle(GetCarrersListQuery query, CancellationToken cancellationToken)
         {
-            var request = query.Adapt<CareerListRequest>();
+            var request = query.Adapt<CareerFilterListRequest>();
 
             var response = await _careerRepository.GetCarrersListAsync(request);
 

@@ -19,7 +19,7 @@ namespace CleanArchitecture.API.Mappers
             #endregion
 
             #region Request
-            TypeAdapterConfig<GetCarrersListQuery, CareerListRequest>.NewConfig().MapToConstructor(true);
+            TypeAdapterConfig<GetCarrersListQuery, CareerFilterListRequest>.NewConfig().MapToConstructor(true);
             #endregion
 
             #region Response

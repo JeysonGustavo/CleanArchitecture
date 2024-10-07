@@ -39,6 +39,6 @@ namespace CleanArchitecture.Application.Repositories.Career
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        Task<IEnumerable<CareerResponse>> GetCarrersListAsync(CareerListRequest request);
+        Task<IEnumerable<CareerResponse>> GetCarrersListAsync(CareerFilterListRequest request);
     }
 }
