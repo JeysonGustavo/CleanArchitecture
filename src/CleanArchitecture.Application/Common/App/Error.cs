@@ -2,20 +2,14 @@
 
 namespace CleanArchitecture.Application.Common.App
 {
-    public class Error
+    [method: JsonConstructor]
+    public class Error(string errorCode, string errorMessage)
     {
         #region Properties
-        public string ErrorCode { get; set; }
-        public string ErrorMessage { get; set; }
-        #endregion
+        public static readonly Error None = new(string.Empty, string.Empty);
 
-        #region Constructor
-        [JsonConstructor]
-        public Error(string errorCode, string errorMessage)
-        {
-            ErrorCode = errorCode;
-            ErrorMessage = errorMessage;
-        }
+        public string ErrorCode { get; } = errorCode;
+        public string ErrorMessage { get; } = errorMessage;
         #endregion
     }
 }

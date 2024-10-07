@@ -3,72 +3,51 @@
     public class ApplicationResult
     {
         #region Properties
-        public bool Success { get; set; }
-        public object? ResultData { get; set; }
-        public List<Error>? Errors { get; set; } = [];
+        public bool IsSuccess { get; }
+        public object? Data { get; }
+        public List<Error>? Errors { get; } = [];
         #endregion
 
         #region Constructor
-        public ApplicationResult() { }
-        #endregion
-
-        #region Methods
-        public static ApplicationResult WithSuccess()
+        public ApplicationResult(bool isSuccess, Error error) 
         {
-            var applicationResult = new ApplicationResult();
-            applicationResult.SetSucces();
-            return applicationResult;
-        }
-
-        public static ApplicationResult WithSuccess(object resultData)
-        {
-            var applicationResult = new ApplicationResult();
-            applicationResult.SetSucces(resultData);
-            return applicationResult;
-        }
-
-        public static ApplicationResult WithError(string errorCode, string errorMessage)
-        {
-            var applicationResult = new ApplicationResult();
-            applicationResult.SetError(new Error(errorCode, errorMessage));
-            return applicationResult;
-        }
-
-        public static ApplicationResult WithError(IEnumerable<Error> errors)
-        {
-            var applicationResult = new ApplicationResult();
-            applicationResult.SetErrors(errors);
-            return applicationResult;
-        }
-
-        public void SetSucces()
-        {
-            Success = true;
-            ResultData = null;
-            Errors = null;
-        }
-
-        public void SetSucces(object resultData)
-        {
-            Success = true;
-            ResultData = resultData;
-            Errors = null;
-        }
-
-        public void SetError(Error error)
-        {
-            Success = false;
-            ResultData = null;
-            Errors ??= [];
+            IsSuccess = isSuccess;
             Errors.Add(error);
         }
 
-        public void SetErrors(IEnumerable<Error> errors)
+        public ApplicationResult(object? data, bool isSuccess, Error error)
         {
-            Success = false;
-            ResultData = null;
-            Errors = errors.ToList();
+            Data = data;
+            IsSuccess = isSuccess;
+            Errors.Add(error);
         }
+
+        public ApplicationResult(bool isSuccess, List<Error> errors)
+        {
+            IsSuccess = isSuccess;
+            Errors = errors;
+        }
+
+        public ApplicationResult(object? data, bool isSuccess, List<Error> errors)
+        {
+            Data = data;
+            IsSuccess = isSuccess;
+            Errors = errors;
+        }
+        #endregion
+
+        #region Methods
+        public static ApplicationResult Success() => new(true, Error.None);
+
+        public static ApplicationResult Success(object data) => new(data, true, Error.None);
+
+        public static ApplicationResult Failure(Error error) => new (false, error);
+
+        public static ApplicationResult Failure(List<Error> errors) => new(false, errors);
+
+        public static ApplicationResult Failure(object data, Error error) => new(data, false, error);
+
+        public static ApplicationResult Failure(object data, List<Error> errors) => new(data, false, errors);
 
         public bool HasErrors() => Errors is not null && Errors.Count > 0;
         #endregion

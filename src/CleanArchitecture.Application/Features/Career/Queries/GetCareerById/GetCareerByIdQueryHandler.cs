@@ -12,6 +12,7 @@ namespace CleanArchitecture.Application.Features.Career.Queries.GetCareerById
         private readonly ICareerRepository _careerRepository = careerRepository;
         #endregion
 
+        #region Handle
         public async Task<ApplicationResult> Handle(GetCareerByIdQuery query, CancellationToken cancellationToken)
         {
             if (query.Id < 1)
@@ -19,7 +20,8 @@ namespace CleanArchitecture.Application.Features.Career.Queries.GetCareerById
 
             var response = await _careerRepository.GetCareerByIdAsync(query.Id) ?? throw new NotFoundException(DefaultErrorMessages.CAREER_NOT_FOUND);
 
-            return ApplicationResult.WithSuccess(response);
-        }
+            return ApplicationResult.Success(response);
+        } 
+        #endregion
     }
 }

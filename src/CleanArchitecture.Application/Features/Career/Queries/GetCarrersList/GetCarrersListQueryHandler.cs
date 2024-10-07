@@ -1,8 +1,7 @@
 using CleanArchitecture.Application.Common.App;
-using CleanArchitecture.Application.Contracts.Request.Career;
+using CleanArchitecture.Application.Contracts.Response.Career;
 using CleanArchitecture.Application.Messaging.Query;
 using CleanArchitecture.Application.Repositories.Career;
-using Mapster;
 
 namespace CleanArchitecture.Application.Features.Career.Queries.GetCarrersList
 {
@@ -15,11 +14,9 @@ namespace CleanArchitecture.Application.Features.Career.Queries.GetCarrersList
         #region Handle
         public async Task<ApplicationResult> Handle(GetCarrersListQuery query, CancellationToken cancellationToken)
         {
-            var request = query.Adapt<CareerFilterListRequest>();
+            var response = await _careerRepository.GetCarrersListAsync(query.Request);
 
-            var response = await _careerRepository.GetCarrersListAsync(request);
-
-            return ApplicationResult.WithSuccess(response);
+            return ApplicationResult.Success(response ?? new List<CareerResponse>());
         }
         #endregion
     }
