@@ -1,6 +1,6 @@
 using CleanArchitecture.Application.Common.App;
+using CleanArchitecture.Application.Common.Messaging.Query;
 using CleanArchitecture.Application.Contracts.Response.Career;
-using CleanArchitecture.Application.Messaging.Query;
 using CleanArchitecture.Application.Repositories.Career;
 
 namespace CleanArchitecture.Application.Features.Career.Queries.GetCarrersList

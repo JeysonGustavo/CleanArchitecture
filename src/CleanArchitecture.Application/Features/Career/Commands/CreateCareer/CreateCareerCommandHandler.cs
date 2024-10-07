@@ -1,6 +1,6 @@
 ﻿using CleanArchitecture.Application.Common.App;
+using CleanArchitecture.Application.Common.Messaging.Command;
 using CleanArchitecture.Application.Contracts.Response.Career;
-using CleanArchitecture.Application.Messaging.Command;
 using CleanArchitecture.Application.Repositories.Career;
 using CleanArchitecture.Domain.Entities.Career;
 using Mapster;

@@ -1,7 +1,7 @@
 ﻿using CleanArchitecture.Application.Common.App;
 using MediatR;
 
-namespace CleanArchitecture.Application.Messaging.Command
+namespace CleanArchitecture.Application.Common.Messaging.Command
 {
     public interface ICommandHandler<TCommand> : IRequestHandler<TCommand, ApplicationResult> where TCommand : ICommand
     {

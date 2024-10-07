@@ -1,4 +1,4 @@
-using CleanArchitecture.Application.Messaging.Query;
+using CleanArchitecture.Application.Common.Messaging.Query;
 
 namespace CleanArchitecture.Application.Features.Career.Queries.GetCareerById
 {

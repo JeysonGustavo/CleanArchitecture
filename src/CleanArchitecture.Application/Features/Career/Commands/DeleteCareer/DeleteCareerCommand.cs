@@ -1,4 +1,4 @@
-using CleanArchitecture.Application.Messaging.Command;
+using CleanArchitecture.Application.Common.Messaging.Command;
 
 namespace CleanArchitecture.Application.Features.Career.Commands.DeleteCareer
 {

@@ -1,5 +1,5 @@
+using CleanArchitecture.Application.Common.Messaging.Query;
 using CleanArchitecture.Application.Contracts.Request.Career;
-using CleanArchitecture.Application.Messaging.Query;
 
 namespace CleanArchitecture.Application.Features.Career.Queries.GetCarrersList
 {

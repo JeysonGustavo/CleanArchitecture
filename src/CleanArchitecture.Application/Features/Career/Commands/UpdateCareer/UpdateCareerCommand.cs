@@ -1,5 +1,5 @@
 using CleanArchitecture.Application.Common.ErrorMessage;
-using CleanArchitecture.Application.Messaging.Command;
+using CleanArchitecture.Application.Common.Messaging.Command;
 using FluentValidation;
 
 namespace CleanArchitecture.Application.Features.Career.Commands.UpdateCareer

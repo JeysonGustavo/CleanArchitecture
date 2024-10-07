@@ -1,7 +1,7 @@
 using CleanArchitecture.Application.Common.App;
 using CleanArchitecture.Application.Common.ErrorMessage;
 using CleanArchitecture.Application.Common.Exceptions;
-using CleanArchitecture.Application.Messaging.Query;
+using CleanArchitecture.Application.Common.Messaging.Query;
 using CleanArchitecture.Application.Repositories.Career;
 
 namespace CleanArchitecture.Application.Features.Career.Queries.GetCareerById

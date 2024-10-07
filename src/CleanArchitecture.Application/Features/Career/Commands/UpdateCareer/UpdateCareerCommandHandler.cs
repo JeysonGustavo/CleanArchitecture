@@ -1,7 +1,7 @@
 using CleanArchitecture.Application.Common.App;
 using CleanArchitecture.Application.Common.ErrorMessage;
 using CleanArchitecture.Application.Common.Exceptions;
-using CleanArchitecture.Application.Messaging.Command;
+using CleanArchitecture.Application.Common.Messaging.Command;
 using CleanArchitecture.Application.Repositories.Career;
 using CleanArchitecture.Domain.Entities.Career;
 using Mapster;
