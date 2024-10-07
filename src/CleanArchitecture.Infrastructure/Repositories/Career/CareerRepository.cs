@@ -17,7 +17,6 @@ namespace CleanArchitecture.Infrastructure.Repositories.Career
         #region CreateCareerAsync
         public async Task<CareerEntity> CreateCareerAsync(CareerEntity career)
         {
-            StringBuilder sqlBuilder = new();
             DynamicParameters dynamicParameters = new();
 
             string sql = """
@@ -45,18 +44,19 @@ namespace CleanArchitecture.Infrastructure.Repositories.Career
         #region UpdateCareerAsync
         public async Task<bool> UpdateCareerAsync(CareerEntity career)
         {
-            StringBuilder sqlBuilder = new();
             DynamicParameters dynamicParameters = new();
 
-            sqlBuilder.AppendLine(" UPDATE tblCareer ");
-            sqlBuilder.AppendLine("    SET ");
-            sqlBuilder.AppendLine("       Language = @Language ");
-            sqlBuilder.AppendLine("     , Title = @Title ");
-            sqlBuilder.AppendLine("     , Introduction = @Introduction ");
-            sqlBuilder.AppendLine("     , Description = @Description ");
-            sqlBuilder.AppendLine("     , Location = @Location ");
-            sqlBuilder.AppendLine("     , LastModifiedOn = GETDATE() ");
-            sqlBuilder.AppendLine(" WHERE Id = @Id ");
+            string sql = """
+                UPDATE tblCareer
+                   SET
+                      Language = @Language
+                    , Title = @Title
+                    , Introduction = @Introduction
+                    , Description = @Description
+                    , Location = @Location
+                    , LastModifiedOn = GETDATE()
+                WHERE Id = @Id
+                """;
 
             dynamicParameters.Add("@Language", career.Language, DbType.AnsiString, ParameterDirection.Input, CareerEntity.MAX_LENGTH_LANGUAGE);
             dynamicParameters.Add("@Title", career.Title, DbType.AnsiString, ParameterDirection.Input, CareerEntity.MAX_LENGTH_TITLE);
@@ -65,44 +65,46 @@ namespace CleanArchitecture.Infrastructure.Repositories.Career
             dynamicParameters.Add("@Location", career.Location, DbType.AnsiString, ParameterDirection.Input, CareerEntity.MAX_LENGTH_LOCATION);
             dynamicParameters.Add("@Id", career.Id, DbType.Int32, ParameterDirection.Input);
 
-            return await _dbSession.Connection.ExecuteAsync(sql: sqlBuilder.ToString(), param: dynamicParameters, transaction: _dbSession.Transaction) > 0;
+            return await _dbSession.Connection.ExecuteAsync(sql: sql, param: dynamicParameters, transaction: _dbSession.Transaction) > 0;
         }
         #endregion
 
         #region DeleteCareerAsync
         public async Task<bool> DeleteCareerAsync(int id)
         {
-            StringBuilder sqlBuilder = new();
             DynamicParameters dynamicParameters = new();
 
-            sqlBuilder.AppendLine(" DELETE ");
-            sqlBuilder.AppendLine(" FROM tblCareer ");
-            sqlBuilder.AppendLine(" WHERE Id = @Id ");
+            string sql = """
+                DELETE
+                FROM tblCareer
+                WHERE Id = @Id
+                """;
 
             dynamicParameters.Add("@Id", id, DbType.Int32, ParameterDirection.Input);
 
-            return await _dbSession.Connection.ExecuteAsync(sql: sqlBuilder.ToString(), param: dynamicParameters, transaction: _dbSession.Transaction) > 0;
+            return await _dbSession.Connection.ExecuteAsync(sql: sql, param: dynamicParameters, transaction: _dbSession.Transaction) > 0;
         }
         #endregion
 
         #region GetCareerByIdAsync
         public async Task<CareerResponse?> GetCareerByIdAsync(int id)
         {
-            StringBuilder sqlBuilder = new();
             DynamicParameters dynamicParameters = new();
 
-            sqlBuilder.AppendLine(" SELECT C.Id ");
-            sqlBuilder.AppendLine("      , C.Language ");
-            sqlBuilder.AppendLine("      , C.Title ");
-            sqlBuilder.AppendLine("      , C.Introduction ");
-            sqlBuilder.AppendLine("      , C.Description ");
-            sqlBuilder.AppendLine("      , C.Location ");
-            sqlBuilder.AppendLine(" FROM tblCareer C ");
-            sqlBuilder.AppendLine(" WHERE C.Id = @Id ");
+            string sql = """
+                SELECT C.Id
+                     , C.Language
+                     , C.Title
+                     , C.Introduction
+                     , C.Description
+                     , C.Location
+                FROM tblCareer C
+                WHERE C.Id = @Id
+                """;
 
             dynamicParameters.Add("@Id", id, DbType.Int32, ParameterDirection.Input);
 
-            return await _dbSession.Connection.QueryFirstOrDefaultAsync<CareerResponse?>(sql: sqlBuilder.ToString(), param: dynamicParameters, transaction: _dbSession.Transaction);
+            return await _dbSession.Connection.QueryFirstOrDefaultAsync<CareerResponse?>(sql: sql, param: dynamicParameters, transaction: _dbSession.Transaction);
         }
         #endregion
 

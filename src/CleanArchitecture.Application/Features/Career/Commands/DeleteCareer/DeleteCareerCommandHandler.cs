@@ -19,7 +19,7 @@ namespace CleanArchitecture.Application.Features.Career.Commands.DeleteCareer
 
             var response = await _careerRepository.DeleteCareerAsync(command.Id);
 
-            return ApplicationResult.WithSuccess(response);
+            return ApplicationResult.Success(response);
         }
         #endregion
     }

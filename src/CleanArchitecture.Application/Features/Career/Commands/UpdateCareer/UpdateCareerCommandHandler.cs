@@ -19,7 +19,7 @@ namespace CleanArchitecture.Application.Features.Career.Commands.UpdateCareer
 
             var response = await _carrerRepository.UpdateCareerAsync(career);
 
-            return ApplicationResult.WithSuccess(response);
+            return ApplicationResult.Success(response);
         }
         #endregion
     }

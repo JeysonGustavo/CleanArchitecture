@@ -1,4 +1,4 @@
-﻿namespace CleanArchitecture.Application.Contracts.Request.Common
+﻿namespace CleanArchitecture.Application.Common.Contracts.Request
 {
     public class PaginationRequest
     {

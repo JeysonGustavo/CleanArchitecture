@@ -19,7 +19,7 @@ namespace CleanArchitecture.Application.Features.Career.Queries.GetCareerById
 
             var response = await _careerRepository.GetCareerByIdAsync(query.Id) ?? throw new NotFoundException(DefaultErrorMessages.CAREER_NOT_FOUND);
 
-            return ApplicationResult.WithSuccess(response);
+            return ApplicationResult.Success(response);
         }
     }
 }

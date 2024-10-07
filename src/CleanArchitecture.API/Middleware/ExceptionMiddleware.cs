@@ -47,7 +47,7 @@ namespace CleanArchitecture.API.Middleware
                 foreach (var error in validationException.Errors)
                     errors.Add(new Error(error.ErrorCode, error.ErrorMessage));
 
-            await httpContext.Response.WriteAsync(ApplicationResult.WithError(errors).ObjectToJson());
+            await httpContext.Response.WriteAsync(ApplicationResult.Failure(errors).ObjectToJson());
         }
         #endregion
 
@@ -70,7 +70,7 @@ namespace CleanArchitecture.API.Middleware
                 _ => "Internal Server Error"
             };
 
-            return context.Response.WriteAsync(ApplicationResult.WithError("1", errorMessage).ObjectToJson());
+            return context.Response.WriteAsync(ApplicationResult.Failure("1", errorMessage).ObjectToJson());
         }
         #endregion
     }

@@ -22,7 +22,7 @@ namespace CleanArchitecture.Application.Features.Career.Commands.CreateCareer
 
             var response = career.Adapt<CareerResponse>();
 
-            return ApplicationResult.WithSuccess(response);
+            return ApplicationResult.Success(response);
         }
         #endregion
     }

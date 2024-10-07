@@ -1,4 +1,4 @@
-using CleanArchitecture.Application.Contracts.Request.Common;
+using CleanArchitecture.Application.Common.Contracts.Request;
 
 namespace CleanArchitecture.Application.Contracts.Request.Career
 {

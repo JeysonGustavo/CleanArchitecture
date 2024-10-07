@@ -3,7 +3,7 @@
     public class ApplicationResult
     {
         #region Properties
-        public bool Success { get; set; }
+        public bool IsSuccess { get; set; }
         public object? ResultData { get; set; }
         public List<Error>? Errors { get; set; } = [];
         #endregion
@@ -13,28 +13,28 @@
         #endregion
 
         #region Methods
-        public static ApplicationResult WithSuccess()
+        public static ApplicationResult Success()
         {
             var applicationResult = new ApplicationResult();
             applicationResult.SetSucces();
             return applicationResult;
         }
 
-        public static ApplicationResult WithSuccess(object resultData)
+        public static ApplicationResult Success(object resultData)
         {
             var applicationResult = new ApplicationResult();
             applicationResult.SetSucces(resultData);
             return applicationResult;
         }
 
-        public static ApplicationResult WithError(string errorCode, string errorMessage)
+        public static ApplicationResult Failure(string errorCode, string errorMessage)
         {
             var applicationResult = new ApplicationResult();
             applicationResult.SetError(new Error(errorCode, errorMessage));
             return applicationResult;
         }
 
-        public static ApplicationResult WithError(IEnumerable<Error> errors)
+        public static ApplicationResult Failure(IEnumerable<Error> errors)
         {
             var applicationResult = new ApplicationResult();
             applicationResult.SetErrors(errors);
@@ -43,21 +43,21 @@
 
         public void SetSucces()
         {
-            Success = true;
+            IsSuccess = true;
             ResultData = null;
             Errors = null;
         }
 
         public void SetSucces(object resultData)
         {
-            Success = true;
+            IsSuccess = true;
             ResultData = resultData;
             Errors = null;
         }
 
         public void SetError(Error error)
         {
-            Success = false;
+            IsSuccess = false;
             ResultData = null;
             Errors ??= [];
             Errors.Add(error);
@@ -65,7 +65,7 @@
 
         public void SetErrors(IEnumerable<Error> errors)
         {
-            Success = false;
+            IsSuccess = false;
             ResultData = null;
             Errors = errors.ToList();
         }
